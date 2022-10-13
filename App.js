@@ -6,10 +6,6 @@ import pic_team1 from './assets/pictures/capdail.webp';
 import pic_team2 from './assets/pictures/as fontonne foot.png';
 import pic_start from './assets/jouer.png';
 
-// Composants
-import Header from './component/header.js';
-
-
 const testData = [
   {
     data: {
@@ -92,7 +88,6 @@ const App = () => {
 
   return (
     <View style={styles.home}>
-      <Header></Header>
       <SafeAreaView style={styles.container}>
         <FlatList
           data={testData}
@@ -112,29 +107,9 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: StatusBar.currentHeight,
   },
-  tinyLogo: {
-    width: 400,
-    height: 250,
-  },
   container: {
-    flex: 4,
+    flex: 1,
     paddingTop: StatusBar.currentHeight,
-    // marginHorizontal: 16,
-    marginTop: 70,
-    height: 300,
-
-  },
-  item: {
-    // backgroundColor: "#f9c2ff",
-    padding: 20,
-    marginVertical: 8
-  },
-  header: {
-    fontSize: 32,
-    backgroundColor: "#fff"
-  },
-  title: {
-    fontSize: 24
   },
   match: {
     flex: 2,
@@ -144,7 +119,6 @@ const styles = StyleSheet.create({
     marginTop: 15,
     marginBottom: 15,
   },
-
   player: {
     borderRadius: "11px",
     width: 350,
@@ -159,14 +133,12 @@ const styles = StyleSheet.create({
     height: 200,
     marginBottom: 10
   },
-
   headerPic: {
     width: 50,
     height: 50,
     marginLeft: 10,
     marginRight: 10
   },
-
   textTeam: {
     marginLeft: 10,
     marginRight: 10,
