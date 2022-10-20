@@ -1,10 +1,30 @@
-import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar, Image } from 'react-native';
+import React from 'react';
+import type {Node} from 'react';
+import {
+  SafeAreaView,
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  useColorScheme,
+  View,
+  FlatList,
+  Image
+} from 'react-native';
 
-// Images
+import {
+  Colors,
+  DebugInstructions,
+  Header,
+  LearnMoreLinks,
+  ReloadInstructions,
+} from 'react-native/Libraries/NewAppScreen';
+
 import pic_video from './assets/pictures/cleats-on-soccer-ball.jpg';
 import pic_team1 from './assets/pictures/capdail.webp';
-import pic_team2 from './assets/pictures/as fontonne foot.png';
+import pic_team2 from './assets/pictures/as-fontonne-foot.png';
 import pic_start from './assets/jouer.png';
+
 
 const testData = [
   {
@@ -60,46 +80,55 @@ const testData = [
   },
 ];
 
-const App = () => {
-  const renderMatch = ({ item }) => (
-    <View style={styles.match}>
-      <View style={styles.headerView}>
-        <Image source={item.data.team1.picture} style={styles.headerPic}></Image>
-        <Text style={styles.textTeam}>{item.data.team1.name}</Text>
-        <Text style={styles.textVS}>VS</Text>
-        <Text style={styles.textTeam}>{item.data.team2.name}</Text>
-        <Image source={item.data.team2.picture} style={styles.headerPic}></Image>
-      </View>
-      <View style={styles.playerView}>
-        <Text style={styles.sport}>{item.data.sport}</Text>
-        <Text style={styles.type}>{item.data.type}</Text>
-        <Image
+const renderMatch = ({ item }): Node => (
+  <View style={styles.match}>
+    <View style={styles.headerView}>
+      <Image source={item.data.team1.picture} style={styles.headerPic}></Image>
+      <Text style={styles.textTeam}>{item.data.team1.name}</Text>
+      <Text style={styles.textVS}>VS</Text>
+      <Text style={styles.textTeam}>{item.data.team2.name}</Text>
+      <Image source={item.data.team2.picture} style={styles.headerPic}></Image>
+    </View>
+    <View>
+      <Text style={styles.sport}>{item.data.sport}</Text>
+      <Text style={styles.type}>{item.data.type}</Text>
+      <Image
           style={[styles.player, styles.shadowProp]}
           source={pic_video}
-        />
-        <Image
+        ></Image>
+      <Image
           style={styles.startPlayer}
           source={pic_start}
-        />
-      </View>
-      <Text style={styles.subtitle}>{item.data.subtitle}</Text>
+      ></Image>
     </View>
+    <Text style={styles.subtitle}>{item.data.subtitle}</Text>
+  </View>
   );
+
+const App: () => Node = () => {
+  const isDarkMode = useColorScheme() === 'dark';
+
+  const backgroundStyle = {
+    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+  };
 
   return (
     <View style={styles.home}>
       <SafeAreaView style={styles.container}>
-        <FlatList
-          data={testData}
-          renderItem={renderMatch}
-          keyExtractor={item => item.id}
+        <StatusBar
+          barStyle={isDarkMode ? 'light-content' : 'dark-content'}
+          backgroundColor={backgroundStyle.backgroundColor}
         />
+        <FlatList
+            data={testData}
+            renderItem={renderMatch}
+            keyExtractor={item => item.id}
+          />
       </SafeAreaView>
-
-    </View >
-
+    </View>
+    
   );
-}
+};
 
 const styles = StyleSheet.create({
   home: {
@@ -112,16 +141,16 @@ const styles = StyleSheet.create({
     paddingTop: StatusBar.currentHeight,
   },
   match: {
-    flex: 2,
+    flex: 1,
     flexDirection: "column",
     alignItems: "center",
     width: "100%",
-    marginTop: 15,
-    marginBottom: 15,
+    // marginTop: 15,
+    marginBottom: 30,
   },
   player: {
-    borderRadius: "11px",
-    width: 350,
+    borderRadius: 11,
+    width: 325,
     height: 225,
   },
 
@@ -130,7 +159,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     alignContent: "space-around",
-    height: 200,
+    height: 75,
     marginBottom: 10
   },
   headerPic: {
@@ -143,13 +172,13 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     marginRight: 10,
     color: "#FFF",
-    fontWeight: 600,
+    // fontWeight: 600,
   },
   textVS: {
     marginLeft: 5,
     marginRight: 5,
     fontSize: 20,
-    fontWeight: 600,
+    // fontWeight: 600,
     color: "#FE0152",
   },
   subtitle: {
@@ -166,7 +195,7 @@ const styles = StyleSheet.create({
     paddingBottom: 3,
     paddingLeft: 5,
     paddingRight: 5,
-    borderRadius: "11px",
+    borderRadius: 11,
     borderColor: "#FFF",
     borderWidth: 1,
     color: "#FFF"
@@ -181,7 +210,7 @@ const styles = StyleSheet.create({
     paddingBottom: 3,
     paddingLeft: 5,
     paddingRight: 5,
-    borderRadius: "11px",
+    borderRadius: 11,
     color: "#FFF"
   },
   shadowProp: {
@@ -200,6 +229,5 @@ const styles = StyleSheet.create({
   },
 
 });
-
 
 export default App;

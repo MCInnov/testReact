@@ -1,0 +1,4 @@
+#Thu Oct 20 13:45:49 CEST 2022
+base.0=/Users/maximilien/Documents/Programmation/testAppReact/android/app/build/intermediates/dex/release/mergeDexRelease/classes.dex
+renamed.0=classes.dex
+path.0=classes.dex
